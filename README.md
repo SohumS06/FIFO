@@ -1,6 +1,6 @@
 # FIFO with AXI4-Stream
 
-The RTL and its logic here are hand-written by me. AI assistance was used only for the verification side of things (the cocotb testbenches and the waveform-rendering script) — not for the FIFO or the AXI4-Stream wrapper itself.
+The RTL and its logic here are hand-written by me. I also wrote some of the cocotb testbenches myself; AI assistance filled in the rest of the test coverage and wrote the waveform-rendering script, but the FIFO and the AXI4-Stream wrapper are untouched by it.
 
 This is a parameterized synchronous FIFO with an AXI4-Stream wrapper on top of it, so it can drop into anything expecting a standard AXIS handshake instead of raw read/write enables.
 
@@ -37,7 +37,3 @@ Pointer wraparound — three full fill/drain rounds back to back, enough for the
 - `rtl/` — the FIFO and its AXI4-Stream wrapper
 - `sim/` — cocotb testbench, waveform script, and the Makefile that drives Icarus Verilog
 - `docs/waveforms/` — rendered waveform PNGs
-
-## What's left
-
-No overflow/underflow protection on the base FIFO — writing while full or reading while empty silently corrupts state rather than being blocked or flagged. That's a reasonable contract for something meant to sit behind properly gated AXI4-Stream handshakes, but it's worth calling out if this ever gets used somewhere that can't guarantee that.
