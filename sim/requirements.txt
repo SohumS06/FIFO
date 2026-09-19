@@ -1,0 +1,4 @@
+cocotb
+pytest
+vcdvcd
+matplotlib
